@@ -1,22 +1,16 @@
-import { Router } from "@vaadin/router";
+import { css, customElement, html } from "@microsoft/fast-element";
+import {
+  TextField,
+  TextFieldTemplate as template,
+} from "@microsoft/fast-foundation";
 
-import styles from "./app.scss";
-
-const styling = document.createElement("style");
-styling.innerText = styles;
-
-document.querySelector("head").append(styling);
-
-const router = new Router(document.getElementById("app"));
-router.setRoutes([
-  { path: "/", component: "wcs-home" },
-  { path: "(.*)", component: "wcs-not-found" },
-]);
-/** *
- * Disabled the @webcomponents/webcomponentsjs by default. Uncomment if you need to support older browsers
- */
-// require("@webcomponents/webcomponentsjs/webcomponents-bundle.js");
-
-require("./Header/Header");
-require("./Home/Home");
-require("./NotFound/NotFound");
+@customElement({
+  name: "my-text-field",
+  template: html`${template}<slot name="whatever"></slot>`,
+  styles: css`
+    :host {
+      background-color: red;
+    }
+  `,
+})
+export default class TextFieldComponent extends TextField {}
